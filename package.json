@@ -1,0 +1,23 @@
+{
+  "name": "mimic_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALucking1/mimic_bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ALucking1/mimic_bot/issues"
+  },
+  "homepage": "https://github.com/ALucking1/mimic_bot#readme",
+  "dependencies": {
+    "botkit": "^0.4.1",
+    "express": "^4.14.0"
+  }
+}

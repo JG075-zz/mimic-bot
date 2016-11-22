@@ -15,17 +15,13 @@ describe('Tweets', function() {
     });
 
     it('should add tweets to tweets array', function(){
-      var twitterAPISample = {
-  "statuses": [
-    {
-      "text": "Aggressive Ponytail #freebandnames"
-    }]};
+      var twitterAPISample = [{ "text": "Aggressive Ponytail #freebandnames"}, { "text": "To be or not to be...#thatisthequestions"}];
       sinon.stub(Twitter, "getRequest", function(fn){
         fn(twitterAPISample);
       });
       var tweets = new Tweets(Twitter);
       tweets.getTweets();
-      console.log(tweets.tweets.length);
-      assert.equal(tweets.tweets.length, 1);
+      console.log(tweets.tweets);
+      assert.equal(tweets.tweets.length, 2);
     });
 });

@@ -1,15 +1,15 @@
 require('dotenv').config();
 
-var express = require('express')
-var app = express()
-
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
-
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+// var express = require('express');
+// var app = express();
+//
+// app.get('/', function (req, res) {
+//   res.send('Hello World!');
+// });
+//
+// app.listen(3000, function () {
+//   console.log('Example app listening on port 3000!');
+// })
 
 var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 
@@ -35,6 +35,6 @@ var bot = controller.spawn({
   token: process.env.SLACK_KEY
 }).startRTM();
 
-controller.hears(['why did the chicken cross the road'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['why did the chicken cross the road'], 'ambient', function(bot, message) {
   bot.reply(message, get_response());
 });

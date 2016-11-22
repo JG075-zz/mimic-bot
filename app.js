@@ -1,4 +1,9 @@
 require('dotenv').config();
+var Tweets = require('./lib/tweets').Tweets;
+var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
+
+var twitterAPI = new TwitterAPI();
+var tweets = new Tweets(twitterAPI);
 
 // var express = require('express');
 // var app = express();
@@ -13,18 +18,10 @@ require('dotenv').config();
 
 var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 
-function get_response(){
-  var responses = [
-    'There was a car coming.',
-    'To get to the other side.',
-    'To get the newspaper.',
-    'Because it wanted to find out what those jokes were about.',
-    'To boldly go where no chicken has gone before!',
-    'Because the light was green.',
-    'I could tell you, but then the Chicken Mafia would kill me.'
-  ];
+tweets.getTweets();
 
-  return responses[Math.floor(Math.random() * responses.length)];
+function get_response(){
+  return tweets.tweets[Math.floor(Math.random() * tweets.tweets.length)];
 }
 
 var controller = Botkit.slackbot({
@@ -35,6 +32,6 @@ var bot = controller.spawn({
   token: process.env.SLACK_KEY
 }).startRTM();
 
-controller.hears(['why did the chicken cross the road'], 'ambient', function(bot, message) {
+controller.hears(['wall'], 'ambient', function(bot, message) {
   bot.reply(message, get_response());
 });

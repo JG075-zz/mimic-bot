@@ -3,7 +3,7 @@ var Tweets = require('./lib/tweets').Tweets;
 var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
 
 var twitterAPI = new TwitterAPI();
-var tweets = new Tweets(twitterAPI, ["CIA", "farage"]);
+var tweets = new Tweets(twitterAPI, ["CIA", "Farage"]);
 
 // var express = require('express');
 // var app = express();
@@ -33,5 +33,7 @@ var bot = controller.spawn({
 }).startRTM();
 
 controller.hears(['wall'], 'ambient', function(bot, message) {
+  if (tweets.tweets.length > 0) {
   bot.reply(message, get_response());
+  }
 });

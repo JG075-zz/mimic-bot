@@ -3,7 +3,7 @@ var Tweets = require('./lib/tweets').Tweets;
 var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
 
 var twitterAPI = new TwitterAPI();
-var tweets = new Tweets(twitterAPI);
+var tweets = new Tweets(twitterAPI, ["CIA", "farage"]);
 
 // var express = require('express');
 // var app = express();

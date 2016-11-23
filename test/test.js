@@ -9,7 +9,7 @@ describe('Tweets', function() {
   });
     it('should call our TweetAPI object', function() {
       sinon.spy(Twitter, "getRequest");
-      var tweets = new Tweets(Twitter);
+      var tweets = new Tweets(Twitter, ["test"]);
       tweets.getTweets();
       sinon.assert.calledOnce(Twitter.getRequest);
     });
@@ -19,9 +19,19 @@ describe('Tweets', function() {
       sinon.stub(Twitter, "getRequest", function(fn){
         fn(twitterAPISample);
       });
-      var tweets = new Tweets(Twitter);
+      var tweets = new Tweets(Twitter, ["Ponytail", "be"]);
       tweets.getTweets();
-      console.log(tweets.tweets);
       assert.equal(tweets.tweets.length, 2);
     });
+
+    it('should only add tweets containing certain words', function(){
+      var twitterAPISample = [{ "text": "Aggressive Ponytail #freebandnames"}, { "text": "To be a panda or not to be...#thatisthequestions"}, { "text": "I am the sugar daddy"}];
+      sinon.stub(Twitter, "getRequest", function(fn){
+        fn(twitterAPISample);
+      });
+      var tweets = new Tweets(Twitter, ["panda"]);
+      tweets.getTweets();
+      assert.equal(tweets.tweets.includes("Aggressive Ponytail #freebandnames"), false);
+    });
+
 });

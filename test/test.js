@@ -2,6 +2,7 @@ var assert = require('assert');
 var sinon = require('sinon');
 var Tweets = require('../lib/tweets').Tweets;
 var TwitterAPI = require('../lib/twitterAPI').TwitterAPI;
+var app = require('../app.js');
 
 describe('Tweets', function() {
   beforeEach(function(){
@@ -31,8 +32,16 @@ describe('Tweets', function() {
       });
       var tweets = new Tweets(Twitter, ["panda"]);
       tweets.getTweets();
-      console.log(tweets.tweets.includes('To be a panda or not to be...#thatisthequestions'))
+      console.log(tweets.tweets.includes('To be a panda or not to be...#thatisthequestions'));
       assert.equal(tweets.tweets.includes("Aggressive Ponytail #freebandnames"), false);
     });
-
 });
+
+  describe('get persona', function() {
+    it('should return a person\'s name and picture', function() {
+      var person = app.getPersona();
+      assert.ok(person.name);
+      assert.ok(person.icon);
+    });
+
+  });

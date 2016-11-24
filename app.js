@@ -39,6 +39,7 @@ function getPersona(){
     icon: "https://assets.rbl.ms/6609271/980x.jpg"
   };
 }
+exports.getPersona = getPersona;
 // "http://iconfever.com/images/portfolio/spongebob.jpg"
 var controller = Botkit.slackbot({
   debug: false

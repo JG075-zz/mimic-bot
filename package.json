@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,13 @@
     "botkit": "^0.4.1",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
-    "twitter"
+    "twitter": "^1.4.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.15",
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
-    "sinon"
+    "mocha-lcov-reporter": "^1.2.0",
+    "sinon": "^1.17.6"
   }
 }

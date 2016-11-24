@@ -31,6 +31,7 @@ describe('Tweets', function() {
       });
       var tweets = new Tweets(Twitter, ["panda"]);
       tweets.getTweets();
+      console.log(tweets.tweets.includes('To be a panda or not to be...#thatisthequestions'))
       assert.equal(tweets.tweets.includes("Aggressive Ponytail #freebandnames"), false);
     });
 

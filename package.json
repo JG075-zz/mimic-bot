@@ -19,9 +19,11 @@
   "dependencies": {
     "botkit": "^0.4.1",
     "dotenv": "^2.0.0",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "twitter"
   },
   "devDependencies": {
-    "mocha": "^3.1.2"
+    "mocha": "^3.1.2",
+    "sinon"
   }
 }

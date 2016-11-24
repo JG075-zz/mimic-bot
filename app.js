@@ -21,6 +21,7 @@ var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 tweets.getTweets();
 
 function get_response(){
+  console.log(3);
   return tweets.tweets[Math.floor(Math.random() * tweets.tweets.length)];
 }
 
@@ -28,12 +29,23 @@ var controller = Botkit.slackbot({
   debug: false
 });
 
+
 var bot = controller.spawn({
   token: process.env.SLACK_KEY
 }).startRTM();
 
 controller.hears(['wall'], 'ambient', function(bot, message) {
+  console.log(4);
+  bot.api.users.profile.set({name: "name", value: "Tom"},
+    function(err, res) {
+      if (err) {
+          bot.botkit.log("Failed to add emoji reaction :(", err);
+      }
+      console.log(res);
+  });
   if (tweets.tweets.length > 0) {
   bot.reply(message, get_response());
+  console.log(bot.identity.name)
+
   }
 });

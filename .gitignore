@@ -1,2 +1,6 @@
 .env
-node_modules/
+node_modules/.bin/
+node_modules/dotenv/
+node_modules/mocha/
+node_modules/sinon/
+node_modules/twitter/

@@ -25,6 +25,14 @@ function get_response(){
   return tweets.tweets[Math.floor(Math.random() * tweets.tweets.length)];
 }
 
+function createMessage(text, persona){
+  return {
+    text: text,
+    username: persona.name,
+    icon_url: "http://iconfever.com/images/portfolio/spongebob.jpg"
+  }
+}
+
 var controller = Botkit.slackbot({
   debug: false
 });
@@ -35,17 +43,7 @@ var bot = controller.spawn({
 }).startRTM();
 
 controller.hears(['wall'], 'ambient', function(bot, message) {
-  console.log(4);
-  bot.api.users.profile.set({name: "name", value: "Tom"},
-    function(err, res) {
-      if (err) {
-          bot.botkit.log("Failed to add emoji reaction :(", err);
-      }
-      console.log(res);
-  });
   if (tweets.tweets.length > 0) {
-  bot.reply(message, get_response());
-  console.log(bot.identity.name)
-
+  bot.reply(message, createMessage(get_response(), "bob"));
   }
 });

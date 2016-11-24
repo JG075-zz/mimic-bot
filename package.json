@@ -18,9 +18,13 @@
   },
   "homepage": "https://github.com/ALucking1/mimic_bot#readme",
   "dependencies": {
+    "JSONStream": "^1.2.1",
     "botkit": "^0.4.1",
+    "concat-stream": "^1.5.2",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "request": "^2.79.0",
+    "strawpoll": "^1.1.0",
     "twitter": "^1.4.0"
   },
   "devDependencies": {

@@ -20,13 +20,31 @@ var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 
 tweets.getTweets();
 
-function get_response(){
+function getResponse(){
+  console.log(3);
   return tweets.tweets[Math.floor(Math.random() * tweets.tweets.length)];
 }
 
+function createMessage(response, persona){
+  return {
+    text: response,
+    username: persona.name,
+    icon_url: persona.icon
+  };
+}
+
+function getPersona(){
+  return {
+    name: 'realDonaldTrump',
+    icon: "https://assets.rbl.ms/6609271/980x.jpg"
+  };
+}
+exports.getPersona = getPersona;
+// "http://iconfever.com/images/portfolio/spongebob.jpg"
 var controller = Botkit.slackbot({
   debug: false
 });
+
 
 var bot = controller.spawn({
   token: process.env.SLACK_KEY
@@ -34,6 +52,6 @@ var bot = controller.spawn({
 
 controller.hears(['wall'], 'ambient', function(bot, message) {
   if (tweets.tweets.length > 0) {
-  bot.reply(message, get_response());
+  bot.reply(message, createMessage(getResponse(), getPersona()));
   }
 });

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,8 @@
     "mocha": "^3.1.2",
     "mocha-lcov-reporter": "^1.2.0",
     "sinon": "^1.17.6"
+  },
+  "engines": {
+    "node": "7.1.0"
   }
 }

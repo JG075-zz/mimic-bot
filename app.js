@@ -1,9 +1,14 @@
 require('dotenv').config();
 var Tweets = require('./lib/tweets').Tweets;
 var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
+var StrawPollAPI = require('./lib/strawpollAPI').StrawPollAPI;
 
 var twitterAPI = new TwitterAPI();
 var tweets = new Tweets(twitterAPI, ["CIA", "Farage"]);
+
+var StrawPollAPI = new StrawPollAPI();
+
+
 
 // var express = require('express');
 // var app = express();
@@ -17,6 +22,22 @@ var tweets = new Tweets(twitterAPI, ["CIA", "Farage"]);
 // })
 
 var Botkit = require('./node_modules/botkit/lib/Botkit.js');
+
+function createAndPostPoll() {
+  StrawPollAPI.createPoll();
+  StrawPollAPI.postPoll();
+}
+
+function retrieveWinnerFromPoll() {
+    StrawPollAPI.retrievePoll();
+    setTimeout(function(){
+      StrawPollAPI.getNamePoll();
+      StrawPollAPI.getWinner();
+      StrawPollAPI.getWinnerUsername();
+      console.log(StrawPollAPI.winnerName);
+
+    }, 5000);
+}
 
 tweets.getTweets();
 
@@ -33,9 +54,9 @@ function createMessage(response, persona){
   };
 }
 
-function getPersona(){
+function getPersona(username){
   return {
-    name: 'realDonaldTrump',
+    name: username,
     icon: "https://assets.rbl.ms/6609271/980x.jpg"
   };
 }
@@ -55,3 +76,8 @@ controller.hears(['wall'], 'ambient', function(bot, message) {
   bot.reply(message, createMessage(getResponse(), getPersona()));
   }
 });
+
+createAndPostPoll();
+setTimeout(function(){
+retrieveWinnerFromPoll();
+}, 20000);

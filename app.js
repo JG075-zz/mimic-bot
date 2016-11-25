@@ -16,6 +16,7 @@ var app = express();
 
 var twitterAPI;
 var tweets;
+var image;
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -38,12 +39,15 @@ function retrieveWinnerFromPoll() {
       StrawPollAPI.getWinner();
       StrawPollAPI.getWinnerUsername();
       twitterAPI = new TwitterAPI(StrawPollAPI.winnerName);
+      twitterAPI.getImage(function(response){
+        image = response;
+      });
       tweets = new Tweets(twitterAPI, ["the", "a", "them", "guys"]);
       console.log("ready!");
       // console.log(StrawPollAPI.winnerName);
       tweets.getTweets();
 
-    }, 5000);
+    }, 6000);
 }
 
 // For every poll winner=-0§1 ``
@@ -64,10 +68,10 @@ function createResponse(responseText, persona){
   };
 }
 
-function getResponsePersona(username){
+function getResponsePersona(username, image){
   return {
-    name: username,
-    icon: "https://assets.rbl.ms/6609271/980x.jpg"
+    name: username || 'bob',
+    icon: image || "http://images2.fanpop.com/images/photos/7000000/Spongebob-Icon-spongebob-squarepants-7039737-100-100.jpg"
   };
 }
 exports.getResponsePersona = getResponsePersona;
@@ -81,9 +85,9 @@ var bot = controller.spawn({
   token: process.env.SLACK_KEY
 }).startRTM();
 
-controller.hears(['wall'], 'ambient', function(bot, message) {
+controller.hears(['mimic'], 'ambient', function(bot, message) {
   if (tweets.tweets.length > 0) {
-  bot.reply(message, createResponse(getResponseText(), getResponsePersona(StrawPollAPI.winnerName)));
+  bot.reply(message, createResponse(getResponseText(), getResponsePersona(StrawPollAPI.winnerName, image)));
   }
 });
 

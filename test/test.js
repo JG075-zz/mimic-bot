@@ -39,7 +39,7 @@ describe('Tweets', function() {
 
   describe('get persona', function() {
     it('should return a person\'s name and picture', function() {
-      var person = app.getPersona();
+      var person = app.getResponsePersona();
       assert.ok(person.name);
       assert.ok(person.icon);
     });

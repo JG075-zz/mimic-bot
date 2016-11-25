@@ -5,23 +5,20 @@ var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
 var twitterAPI = new TwitterAPI();
 var tweets = new Tweets(twitterAPI, ["CIA", "Farage"]);
 
-// var express = require('express');
-// var app = express();
-//
-// app.get('/', function (req, res) {
-//   res.send('Hello World!');
-// });
-//
-// app.listen(3000, function () {
-//   console.log('Example app listening on port 3000!');
-// })
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello World!');
+});
+
+app.listen(process.env.PORT || 3000, function () {});
 
 var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 
 tweets.getTweets();
 
 function getResponse(){
-  console.log(3);
   return tweets.tweets[Math.floor(Math.random() * tweets.tweets.length)];
 }
 
@@ -40,7 +37,6 @@ function getPersona(){
   };
 }
 exports.getPersona = getPersona;
-// "http://iconfever.com/images/portfolio/spongebob.jpg"
 var controller = Botkit.slackbot({
   debug: false
 });

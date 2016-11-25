@@ -3,14 +3,19 @@ var Tweets = require('./lib/tweets').Tweets;
 var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
 var StrawPollAPI = require('./lib/strawpollAPI').StrawPollAPI;
 
-var twitterAPI = new TwitterAPI();
-var tweets = new Tweets(twitterAPI, ["CIA", "Farage"]);
+// var twitterAPI = new TwitterAPI();
+// var tweets = new Tweets(twitterAPI, ["CIA", "Farage"]);
 
 
 var StrawPollAPI = new StrawPollAPI();
 
 var express = require('express');
 var app = express();
+
+//EXPERIMENTAL
+
+var twitterAPI;
+var tweets;
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
@@ -32,12 +37,20 @@ function retrieveWinnerFromPoll() {
       StrawPollAPI.getNamePoll();
       StrawPollAPI.getWinner();
       StrawPollAPI.getWinnerUsername();
-      console.log(StrawPollAPI.winnerName);
+      twitterAPI = new TwitterAPI(StrawPollAPI.winnerName);
+      tweets = new Tweets(twitterAPI, ["the", "a", "them", "guys"]);
+      console.log("ready!");
+      // console.log(StrawPollAPI.winnerName);
+      tweets.getTweets();
 
     }, 5000);
 }
 
-tweets.getTweets();
+// For every poll winner=-0§1 ``
+// Create a new Tweets object
+// Pass in the name
+// Call get tweets
+// Then do everything else
 
 function getResponseText(){
   return tweets.tweets[Math.floor(Math.random() * tweets.tweets.length)];
@@ -70,11 +83,11 @@ var bot = controller.spawn({
 
 controller.hears(['wall'], 'ambient', function(bot, message) {
   if (tweets.tweets.length > 0) {
-  bot.reply(message, createResponse(getResponseText(), getResponsePersona()));
+  bot.reply(message, createResponse(getResponseText(), getResponsePersona(StrawPollAPI.winnerName)));
   }
 });
 
 createAndPostPoll();
 setTimeout(function(){
-retrieveWinnerFromPoll();
+  retrieveWinnerFromPoll();
 }, 20000);

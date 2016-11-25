@@ -1,0 +1,12 @@
+{
+  "name": "Mimic Bot",
+  "description": "Mimic Bot pretends to be whoever you want",
+  "repository": "https://github.com/ALucking1/mimic_bot",
+  "env": {
+    "SLACK_TOKEN": {
+      "description": "Slack bot RTM API token",
+      "required": true
+    },
+  },
+  "image": "heroku/nodejs"
+}

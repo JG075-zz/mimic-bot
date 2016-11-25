@@ -37,7 +37,6 @@ function getPersona(){
   };
 }
 exports.getPersona = getPersona;
-// "http://iconfever.com/images/portfolio/spongebob.jpg"
 var controller = Botkit.slackbot({
   debug: false
 });

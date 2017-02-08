@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ALucking1/mimic_bot.git"
+    "url": "git+https://github.com/JG075/mimic_bot.git"
   },
-  "author": "",
+  "author": "James Gardiner",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ALucking1/mimic_bot/issues"
+    "url": "https://github.com/JG075/mimic_bot/issues"
   },
-  "homepage": "https://github.com/ALucking1/mimic_bot#readme",
+  "homepage": "https://github.com/JG075/mimic_bot#readme",
   "dependencies": {
     "botkit": "^0.4.1",
     "concat-stream": "^1.5.2",

@@ -1,31 +1,15 @@
+'user strict';
+
 require('dotenv').config();
+
+var Botkit = require('botkit');
 var Tweets = require('./lib/tweets').Tweets;
 var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
 var StrawPollAPI = require('./lib/strawpollAPI').StrawPollAPI;
 
-// var twitterAPI = new TwitterAPI();
-// var tweets = new Tweets(twitterAPI, ["CIA", "Farage"]);
-
-
-var StrawPollAPI = new StrawPollAPI();
-
-var express = require('express');
-var app = express();
-
-//EXPERIMENTAL
-
 var twitterAPI;
 var tweets;
 var image;
-
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-
-app.listen(process.env.PORT || 3000, function () {});
-
-
-var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 
 function createAndPostPoll() {
   StrawPollAPI.createPoll();
@@ -33,12 +17,13 @@ function createAndPostPoll() {
 }
 
 function retrieveWinnerFromPoll() {
-    StrawPollAPI.retrievePoll();
+    //StrawPollAPI.retrievePoll();
     setTimeout(function(){
-      StrawPollAPI.getNamePoll();
-      StrawPollAPI.getWinner();
-      StrawPollAPI.getWinnerUsername();
-      twitterAPI = new TwitterAPI(StrawPollAPI.winnerName);
+      // StrawPollAPI.getNamePoll();
+      // StrawPollAPI.getWinner();
+      // StrawPollAPI.getWinnerUsername();
+      // twitterAPI = new TwitterAPI(StrawPollAPI.winnerName);
+      twitterAPI = new TwitterAPI('realDonaldTrump');
       twitterAPI.getImage(function(response){
         image = response;
       });
@@ -46,7 +31,6 @@ function retrieveWinnerFromPoll() {
       console.log("ready!");
       // console.log(StrawPollAPI.winnerName);
       tweets.getTweets();
-
     }, 6000);
 }
 
@@ -91,7 +75,7 @@ controller.hears(['mimic'], 'ambient', function(bot, message) {
   }
 });
 
-createAndPostPoll();
+//createAndPostPoll();
 setTimeout(function(){
   retrieveWinnerFromPoll();
-}, 20000);
+}, 10);

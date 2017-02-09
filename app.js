@@ -7,8 +7,8 @@ var Tweets = require('./lib/tweets').Tweets;
 var TwitterAPI = require('./lib/twitterAPI').TwitterAPI;
 var StrawPollAPI = require('./lib/strawpollAPI').StrawPollAPI;
 
-var twitterAPI = new TwitterAPI('realDonaldTrump');
-var tweets = new Tweets(twitterAPI, ["the", "a", "them", "guys"]);
+var matchingWords = ["the", "a", "them", "guys"];
+var twitterUser = 'realDonaldTrump';
 var useStrawPoll = true;
 var image;
 
@@ -16,8 +16,7 @@ if (useStrawPoll) {
   StrawPollAPI.startPoll();
   setTimeout(function(){
     StrawPollAPI.retrievePoll(function(){
-      twitterAPI = new TwitterAPI(StrawPollAPI.winnerName);
-      tweets = new Tweets(twitterAPI, ["the", "a", "them", "guys"]);
+      twitterUser = StrawPollAPI.winnerName;
       createBot();
     });
   }, 20000);
@@ -26,8 +25,8 @@ if (useStrawPoll) {
 }
 
 function createBot() {
-
-  console.log('Creating the bot!');
+  var twitterAPI = new TwitterAPI(twitterUser);
+  var tweets = new Tweets(twitterAPI, matchingWords);
 
   twitterAPI.getImage(function(response){image = response;});
   tweets.getTweets();
@@ -56,7 +55,7 @@ function createBot() {
 
   controller.hears(['mimic'], 'ambient', function(bot, message) {
     if (tweets.tweets.length > 0) {
-      bot.reply(message, createResponse(getResponseText(), getResponsePersona(StrawPollAPI.winnerName, image)));
+      bot.reply(message, createResponse(getResponseText(), getResponsePersona(twitterUser, image)));
     }
   });
 

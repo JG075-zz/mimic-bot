@@ -53,12 +53,17 @@ function createBot() {
   var controller = Botkit.slackbot({ debug: false });
   var bot = controller.spawn({ token: process.env.SLACK_KEY }).startRTM();
 
-  controller.hears(['mimic'], 'ambient', function(bot, message) {
+  var matchingRegExp = [];
+
+  matchingWords.forEach(function(word, index, array) {
+    matchingRegExp[index] = '^' + word + '$';
+  });
+
+  controller.hears(matchingRegExp, 'ambient', function(bot, message) {
     if (tweets.tweets.length > 0) {
       bot.reply(message, createResponse(getResponseText(), getResponsePersona(twitterUser, image)));
     }
   });
 
   exports.getResponsePersona = getResponsePersona;
-
 }

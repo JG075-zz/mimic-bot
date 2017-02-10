@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/JG075/mimic_bot.git"
   },
-  "author": "James Gardiner",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/JG075/mimic_bot/issues"
@@ -22,7 +22,6 @@
     "botkit": "^0.4.1",
     "concat-stream": "^1.5.2",
     "dotenv": "^2.0.0",
-    "express": "^4.14.0",
     "request": "^2.79.0",
     "strawpoll": "^1.1.0",
     "twitter": "^1.4.0"

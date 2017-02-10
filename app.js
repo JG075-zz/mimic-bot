@@ -9,7 +9,7 @@ var StrawPollAPI = require('./lib/strawpollAPI').StrawPollAPI;
 
 var matchingWords = ["the", "a", "them", "guys"];
 var twitterUser = 'realDonaldTrump';
-var useStrawPoll = true;
+var useStrawPoll = false;
 var image;
 
 if (useStrawPoll) {
@@ -46,7 +46,7 @@ function createBot() {
   function getResponsePersona(username, image){
     return {
       name: username || 'bob',
-      icon: image || "http://images2.fanpop.com/images/photos/7000000/Spongebob-Icon-spongebob-squarepants-7039737-100-100.jpg"
+      icon: image || "https://s3-eu-west-1.amazonaws.com/mimic-bot/default.jpg"
     };
   }
 

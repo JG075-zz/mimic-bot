@@ -1,4 +1,6 @@
-'user strict';
+(function () {
+   'use strict';
+}());
 
 require('dotenv').config();
 

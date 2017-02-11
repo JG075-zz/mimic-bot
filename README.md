@@ -1,6 +1,7 @@
 # Mimic Bot
 
-[BADGES]
+[![Build Status](https://travis-ci.org/JG075/mimic-bot.svg?branch=master)](https://travis-ci.org/JG075/mimic-bot)
+[![Coverage Status](https://coveralls.io/repos/github/JG075/mimic-bot/badge.svg?branch=master)](https://coveralls.io/github/JG075/mimic-bot?branch=master)
 
 Mimic Bot is a fun Slack bot that can impersonate other people using their previous tweets. It also has the option to use [StrawPoll](http://www.strawpoll.me) so people can vote on who gets impersonated.
 

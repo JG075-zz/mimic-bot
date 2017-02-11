@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
     "start": "node app.js"
   },
   "repository": {
@@ -26,10 +27,8 @@
     "twitter": "^1.4.0"
   },
   "devDependencies": {
-    "coveralls": "^2.11.16",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
-    "mocha-lcov-reporter": "^1.2.0",
     "sinon": "^1.17.6"
   },
   "engines": {
